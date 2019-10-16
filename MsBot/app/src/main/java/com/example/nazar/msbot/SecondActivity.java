@@ -57,13 +57,9 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
         resultView = (TextView) findViewById(R.id.resultText);
 
-        Long date = new Date().getTime() + 10*1000;
+        Long date = new Date().getTime() + 5*60*1000;
 //        setAlarm(reservationTimeCalendar.getTimeInMillis());
         setAlarm(date);
-
-//        GetReservation getReservation = new GetReservation();
-//        getReservation.execute();
-
     }
 
     private void setAlarm(Long alarmTime) {
@@ -86,84 +82,4 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return time.format(formatter);
     }
-
-//    private class GetReservation extends AsyncTask<Void, String, String> implements Serializable {
-//
-//        @Override
-//        protected void onPreExecute() {
-//            resultView.setText(getString(R.string.making_reservation_in_progress));
-//        }
-//
-//        //#TODO - make better response while errors!
-//
-//        @Override
-//        protected String doInBackground(Void... voids) {
-//
-//            try {
-//                msClient.makeRequest(msClient.getSiteName());
-//                publishProgress("Connection: okay");
-//            } catch (Exception e) {
-//                return "Error connection to the website";
-//            }
-//
-//            try {
-//                msClient.postLoginForm(reservationToBeMade);
-//                publishProgress("Login: okay");
-//            } catch (Exception e) {
-//                return "Error connection the login page";
-//            }
-//
-//            // #TODO – find out how to replace do-while loop with something more effective
-//
-//            String result = "";
-//            int timer = 0;
-//
-//            do { // STARTING POINT FOR LOOP
-//
-//                try {
-//                    TimeUnit.MILLISECONDS.sleep(500);
-//                    timer++;
-//                } catch (InterruptedException e) {
-//                    Log.i("timer", e.getMessage());
-//                }
-//
-//                /// get html of the page in response and analyze it later
-//                try {
-//                    CloseableHttpResponse responseOnReservationRequest = msClient.getResponseOnRequest(reservationToBeMade, "Reservation page");
-//                    HttpEntity entityReservation = responseOnReservationRequest.getEntity();
-//                    String responseStr = EntityUtils.toString(entityReservation); // convert response in String
-//
-//                    Document pageDocument = Jsoup.parse(responseStr); // convert String to doc (jSoup library)
-//
-//                    // get map where key are times and value are rows of the table with reservations
-//                    Map<Integer,Element> timeMap = msClient.getTimeAndRowMap(pageDocument);
-//
-//                    //TODO: make this work using stream
-//
-//                    for (Map.Entry<Integer, Element> entry : timeMap.entrySet()) {
-//                        Integer time = entry.getKey();
-//
-//                        //if so, reserve this term
-//                        if (time.equals(reservationToBeMade.getTimeOfGame())) {
-//                            result = msClient.attemptReservation(timeMap.get(time));
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    Log.i("pageOfReservations", e.getMessage());
-//                }
-//                publishProgress(Integer.toString(timer));
-//            } while(!result.equals("Reservation has been made!") && timer != 15); // ENDING POINT FOR LOOP
-//            return result;
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(String... values) {
-//            resultView.setText(values[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            resultView.setText(result);
-//        }
-//    }
 }
