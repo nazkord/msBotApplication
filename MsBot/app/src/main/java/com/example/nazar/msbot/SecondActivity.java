@@ -39,8 +39,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     private static Calendar getReservationTimeCalendar() {
         reservationTimeCalendar = Calendar.getInstance();
         reservationTimeCalendar.setTimeInMillis(System.currentTimeMillis());
-        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 19);
-        reservationTimeCalendar.set(Calendar.MINUTE, 45);
+        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 5);
+        reservationTimeCalendar.set(Calendar.MINUTE, 59);
 //        reservationTimeCalendar.set(Calendar.SECOND, 15);
         return reservationTimeCalendar;
     }
@@ -57,9 +57,9 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
         resultView = (TextView) findViewById(R.id.resultText);
 
-        Long date = new Date().getTime() + 5*60*1000;
-//        setAlarm(reservationTimeCalendar.getTimeInMillis());
-        setAlarm(date);
+//        Long alarmTime = new Date().getTime() + 2*1000;
+        setAlarm(reservationTimeCalendar.getTimeInMillis());
+//        setAlarm(alarmTime);
     }
 
     private void setAlarm(Long alarmTime) {
@@ -71,8 +71,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
         int AlarmType = AlarmManager.RTC;
-        Log.d("DUPA", "Alarm check");
-        Log.d("DUPA", getTestTime());
+        Log.i("DUPA", "Alarm check");
+        Log.i("DUPA", getTestTime());
         alarmManager.setExact(AlarmType, alarmTime, alarmIntent);
 
     }

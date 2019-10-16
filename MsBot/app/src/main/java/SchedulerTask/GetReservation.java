@@ -90,7 +90,7 @@ public class GetReservation extends AsyncTask<Reservation, String, String> imple
                 Log.i("pageOfReservations", e.getMessage());
             }
             publishProgress(Integer.toString(timer));
-        } while(!result.equals("Reservation has been made!") && timer != 15); // ENDING POINT FOR LOOP
+        } while(!result.equals("Reservation has been made!") && timer != 30); // ENDING POINT FOR LOOP
         return result;
     }
 

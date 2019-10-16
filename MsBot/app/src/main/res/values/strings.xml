@@ -24,4 +24,5 @@
     <string name="shPref_password_key">reservationPassword</string>
     <string name="shPref_halfOfField_key">reservation_halfOfField</string>
     <string name="shPref_time_key">reservation_time</string>
+    <string name="success_reservation_key">Reservation has been made!</string>
 </resources>
