@@ -1,13 +1,11 @@
 package SchedulerTask;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.example.nazar.msbot.Reservation;
-import com.example.nazar.msbot.SecondActivity;
 
 import java.io.Serializable;
 import java.time.LocalTime;
@@ -22,6 +20,8 @@ public class MsBotAlarm extends BroadcastReceiver implements Serializable {
         String timeString = time.format(formatter);
         Log.d("DUPA", "Alarm just fired");
         Log.d("DUPA", timeString);
-//        Log.d("DUPA", reservation.getUserName());
+
+        GetReservation getReservation = new GetReservation();
+        getReservation.execute(reservation);
     }
 }
