@@ -19,4 +19,9 @@
     </string-array>
     <string name="error_field_required">This field required</string>
     <string name="making_reservation_in_progress">Please wait .. It is downloading </string>
+    <string name="shPref_reservation_key">reservationSharedPreferences</string>
+    <string name="shPref_userName_key">userNameOfReservation</string>
+    <string name="shPref_password_key">reservationPassword</string>
+    <string name="shPref_halfOfField_key">reservation_halfOfField</string>
+    <string name="shPref_time_key">reservation_time</string>
 </resources>

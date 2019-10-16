@@ -18,7 +18,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -27,6 +26,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import SchedulerTask.MsBotAlarm;
+import SchedulerTask.ReservationSharedPref;
 
 public class SecondActivity extends AppCompatActivity implements Serializable {
 
@@ -53,9 +53,12 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_second);
 
         reservationToBeMade = (Reservation) getIntent().getSerializableExtra("reservationObject");
+
+        ReservationSharedPref.RESERVATION_SHARED_PREF_UTIL.setReservation(this, reservationToBeMade);
+
         resultView = (TextView) findViewById(R.id.resultText);
 
-        Long date = new Date().getTime() + 30*1000;
+        Long date = new Date().getTime() + 10*1000;
 //        setAlarm(reservationTimeCalendar.getTimeInMillis());
         setAlarm(date);
 
@@ -68,7 +71,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(this, MsBotAlarm.class);
-     //   intent.putExtra("reservationObject", reservationToBeMade);
 
         //TODO: consider add:PendingIntent.FLAG_UPDATE_CURRENT instead of last 0
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
