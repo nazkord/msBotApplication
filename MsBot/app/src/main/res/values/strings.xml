@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MsBot</string>
+    <string-array name="halves">
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="timeOfReservationFootball">
+        <item>7</item>
+        <item>9</item>
+        <item>10</item>
+        <item>12</item>
+        <item>13</item>
+        <item>15</item>
+        <item>16</item>
+        <item>18</item>
+        <item>19</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+    <string name="error_field_required">This field required</string>
+    <string name="making_reservation_in_progress">Please wait .. It is downloading </string>
+</resources>
