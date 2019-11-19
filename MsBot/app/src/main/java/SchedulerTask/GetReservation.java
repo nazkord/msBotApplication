@@ -23,8 +23,7 @@ public class GetReservation extends AsyncTask<Reservation, String, String> imple
 
     @Override
     protected void onPreExecute() {
-//        resultView.setText(getString(R.string.making_reservation_in_progress));
-        Log.i("making_reservation_in_progress", "DONE");
+        Log.i("making_reservation_in_progress", "IN PROGRESS");
     }
 
     //#TODO - make better response while errors!
@@ -59,8 +58,9 @@ public class GetReservation extends AsyncTask<Reservation, String, String> imple
         do { // STARTING POINT FOR LOOP
 
             try {
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(4000);
                 timer++;
+                Log.i("timer", String.valueOf(timer));
             } catch (InterruptedException e) {
                 Log.i("timer", e.getMessage());
             }
@@ -90,7 +90,7 @@ public class GetReservation extends AsyncTask<Reservation, String, String> imple
                 Log.i("pageOfReservations", e.getMessage());
             }
             publishProgress(Integer.toString(timer));
-        } while(!result.equals("Reservation has been made!") && timer != 30); // ENDING POINT FOR LOOP
+        } while(!result.equals("Reservation has been made!") && timer != 300); // ENDING POINT FOR LOOP
         return result;
     }
 

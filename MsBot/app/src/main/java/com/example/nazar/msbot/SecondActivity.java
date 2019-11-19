@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import SchedulerTask.GetReservation;
 import SchedulerTask.MsBotAlarm;
 import SchedulerTask.ReservationSharedPref;
 
@@ -39,12 +40,11 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     private static Calendar getReservationTimeCalendar() {
         reservationTimeCalendar = Calendar.getInstance();
         reservationTimeCalendar.setTimeInMillis(System.currentTimeMillis());
-        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 5);
-        reservationTimeCalendar.set(Calendar.MINUTE, 59);
-//        reservationTimeCalendar.set(Calendar.SECOND, 15);
+        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 23);
+        reservationTimeCalendar.set(Calendar.MINUTE, 45);
+        reservationTimeCalendar.set(Calendar.SECOND, 0);
         return reservationTimeCalendar;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,29 +52,23 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_second);
 
         reservationToBeMade = (Reservation) getIntent().getSerializableExtra("reservationObject");
-
         ReservationSharedPref.RESERVATION_SHARED_PREF_UTIL.setReservation(this, reservationToBeMade);
+        resultView = findViewById(R.id.resultText);
 
-        resultView = (TextView) findViewById(R.id.resultText);
-
-//        Long alarmTime = new Date().getTime() + 2*1000;
         setAlarm(reservationTimeCalendar.getTimeInMillis());
-//        setAlarm(alarmTime);
     }
 
     private void setAlarm(Long alarmTime) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(this, MsBotAlarm.class);
-
         //TODO: consider add:PendingIntent.FLAG_UPDATE_CURRENT instead of last 0
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        int AlarmType = AlarmManager.RTC;
+        int AlarmType = AlarmManager.RTC_WAKEUP;
         Log.i("DUPA", "Alarm check");
         Log.i("DUPA", getTestTime());
         alarmManager.setExact(AlarmType, alarmTime, alarmIntent);
-
     }
 
     private String getTestTime() {

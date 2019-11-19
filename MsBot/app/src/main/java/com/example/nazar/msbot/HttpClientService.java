@@ -81,7 +81,9 @@ public class HttpClientService {
     public boolean checkIfFree(Element element) {
         Element cellToReserve = element.select("td").last(); //get cell at last column
 
-        return !cellToReserve.hasAttr("class"); // if rd doesn't contains class "class" - this is free term (according to page)
+        //TODO: here should be a debug point
+
+        return !(cellToReserve.select("button").isEmpty()); // if rd doesn't contains "button" - this is free term (according to page)
     }
 
     public void postLoginForm(Reservation reservationObject) throws Exception {
@@ -150,5 +152,4 @@ public class HttpClientService {
 
         return null;
     }
-
 }
