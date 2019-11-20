@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class HttpClientService {
@@ -57,7 +58,7 @@ public class HttpClientService {
 
     public String attemptReservation(Element row) {
         Element cellToReserve = row.select("td").last();
-        if(checkIfFree(cellToReserve)) {
+        if(checkIfNotDisabled(cellToReserve)) {
             String linkForReservation = getLinkForReservation(cellToReserve);
             return makeRequestForReservation(linkForReservation);
         } else {
@@ -69,7 +70,7 @@ public class HttpClientService {
         return element.select("button").first().attr("formaction");
     }
 
-    public String makeRequestForReservation(String link) {
+    private String makeRequestForReservation(String link) {
         try {
             makeRequest(siteName + link);
         } catch (Exception e) {
@@ -78,12 +79,10 @@ public class HttpClientService {
         return "Reservation has been made!";
     }
 
-    public boolean checkIfFree(Element element) {
-        Element cellToReserve = element.select("td").last(); //get cell at last column
-
-        //TODO: here should be a debug point
-
-        return !(cellToReserve.select("button").isEmpty()); // if rd doesn't contains "button" - this is free term (according to page)
+    private boolean checkIfNotDisabled(Element cellToReserve) {
+        Set<String> classes = cellToReserve.select("button").first().classNames();
+        return (!classes.contains("captcha-disabled"));
+    // if rd doesn't contains "button" - this is free term (according to page)
     }
 
     public void postLoginForm(Reservation reservationObject) throws Exception {
@@ -127,7 +126,7 @@ public class HttpClientService {
                         }, row -> row ));
     }
 
-    public String isCorrectness(CloseableHttpResponse response) { // check whether the response is successful
+    private String isCorrectness(CloseableHttpResponse response) { // check whether the response is successful
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode == 302) {
             return " has been successful";

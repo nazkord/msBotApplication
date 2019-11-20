@@ -40,8 +40,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     private static Calendar getReservationTimeCalendar() {
         reservationTimeCalendar = Calendar.getInstance();
         reservationTimeCalendar.setTimeInMillis(System.currentTimeMillis());
-        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 23);
-        reservationTimeCalendar.set(Calendar.MINUTE, 45);
+        reservationTimeCalendar.set(Calendar.HOUR_OF_DAY, 6);
+        reservationTimeCalendar.set(Calendar.MINUTE, 0);
         reservationTimeCalendar.set(Calendar.SECOND, 0);
         return reservationTimeCalendar;
     }
